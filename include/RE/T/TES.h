@@ -7,6 +7,7 @@
 #include "RE/M/MaterialIDs.h"
 #include "RE/N/NiPoint3.h"
 #include "RE/N/NiSmartPointer.h"
+#include "SKSE/Version.h"
 
 namespace RE
 {
@@ -65,8 +66,16 @@ namespace RE
 
 		static TES* GetSingleton();
 
-		void ForEachReference(std::function<BSContainer::ForEachResult(TESObjectREFR& a_ref)> a_callback);
-		void ForEachReferenceInRange(TESObjectREFR* a_origin, float a_radius, std::function<BSContainer::ForEachResult(TESObjectREFR& a_ref)> a_callback);
+		void ForEachCell(std::function<void(TESObjectCELL*)> a_callback) const;
+		void ForEachCellInRange(TESObjectREFR* a_origin, float a_radius, std::function<void(TESObjectCELL*)> a_callback) const;
+		void ForEachReferenceInRange(TESObjectREFR* a_origin, float a_radius, const std::function<BSContainer::ForEachResult(TESObjectREFR* a_ref)>& a_callback) const;
+		void ForEachReference(const std::function<BSContainer::ForEachResult(TESObjectREFR* a_ref)>& a_callback) const;
+
+		//All TES Members => 0x140 got moved by 0x08 on > .1130, this includes the current world cell ptr.
+		[[nodiscard]] static inline TESWorldSpace* GetCurrentWorldSpace() noexcept
+		{
+			return REL::RelocateMemberIfNewer<TESWorldSpace*>(SKSE::RUNTIME_SSE_1_6_1130, GetSingleton(), 0x140, 0x148);
+		}
 
 		TESObjectCELL*  GetCell(const NiPoint3& a_position) const;
 		MATERIAL_ID     GetLandMaterialType(const NiPoint3& a_position) const;
@@ -76,7 +85,7 @@ namespace RE
 		NiAVObject*     Pick(bhkPickData& a_pickData);
 		void            PurgeBufferedCells();
 
-		// members
+		// members ONLY CORRECT ON < .1130
 		std::uint64_t                                       unk070;                     // 070
 		GridCellArray*                                      gridCells;                  // 078
 		NiNode*                                             objRoot;                    // 080

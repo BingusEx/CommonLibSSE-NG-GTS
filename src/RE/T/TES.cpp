@@ -15,10 +15,79 @@ namespace RE
 		return *singleton;
 	}
 
-	void TES::ForEachReference(std::function<BSContainer::ForEachResult(TESObjectREFR& a_ref)> a_callback)
+	void TES::ForEachCell(std::function<void(TESObjectCELL*)> a_callback) const
 	{
 		if (interiorCell) {
-			interiorCell->ForEachReference([&](TESObjectREFR& a_ref) {
+			a_callback(interiorCell);
+		} else {
+			if (const auto gridLength = gridCells ? gridCells->length : 0; gridLength > 0) {
+				std::uint32_t x = 0;
+				do {
+					std::uint32_t y = 0;
+					do {
+						if (const auto cell = gridCells->GetCell(x, y); cell && cell->IsAttached()) {
+							a_callback(cell);
+						}
+						++y;
+					} while (y < gridLength);
+					++x;
+				} while (x < gridLength);
+			}
+		}
+		if (TESWorldSpace* const ws = GetCurrentWorldSpace()) {
+			if (TESObjectCELL* const skyCell = ws ? ws->GetSkyCell() : nullptr; skyCell) {
+				return a_callback(skyCell);
+			}
+		}
+	}
+
+	void TES::ForEachCellInRange(TESObjectREFR* a_origin, float a_radius, std::function<void(TESObjectCELL*)> a_callback) const
+	{
+		if (a_origin && a_radius > 0.0f) {
+			const auto originPos = a_origin->GetPosition();
+
+			if (interiorCell) {
+				a_callback(interiorCell);
+			} else {
+				if (const auto gridLength = gridCells ? gridCells->length : 0; gridLength > 0) {
+					const float yPlus = originPos.y + a_radius;
+					const float yMinus = originPos.y - a_radius;
+					const float xPlus = originPos.x + a_radius;
+					const float xMinus = originPos.x - a_radius;
+
+					std::uint32_t x = 0;
+					do {
+						std::uint32_t y = 0;
+						do {
+							if (const auto cell = gridCells->GetCell(x, y); cell && cell->IsAttached()) {
+								if (const auto cellCoords = cell->GetCoordinates(); cellCoords) {
+									const NiPoint2 worldPos{ cellCoords->worldX, cellCoords->worldY };
+									if (worldPos.x < xPlus && (worldPos.x + 4096.0f) > xMinus && worldPos.y < yPlus && (worldPos.y + 4096.0f) > yMinus) {
+										return a_callback(cell);
+									}
+								}
+							}
+							++y;
+						} while (y < gridLength);
+						++x;
+					} while (x < gridLength);
+				}
+			}
+
+			if (TESWorldSpace* const ws = GetCurrentWorldSpace()) {
+				if (TESObjectCELL* const skyCell = ws ? ws->GetSkyCell() : nullptr; skyCell) {
+					return a_callback(skyCell);
+				}
+			}
+		} else {
+			return ForEachCell(a_callback);
+		}
+	}
+
+	void TES::ForEachReference(const std::function<BSContainer::ForEachResult(TESObjectREFR* a_ref)>& a_callback) const
+	{
+		if (interiorCell) {
+			interiorCell->ForEachReference([&](TESObjectREFR* a_ref) {
 				return a_callback(a_ref);
 			});
 		} else {
@@ -28,7 +97,7 @@ namespace RE
 					std::uint32_t y = 0;
 					do {
 						if (const auto cell = gridCells->GetCell(x, y); cell && cell->IsAttached()) {
-							cell->ForEachReference([&](TESObjectREFR& a_ref) {
+							cell->ForEachReference([&](TESObjectREFR* a_ref) {
 								return a_callback(a_ref);
 							});
 						}
@@ -38,20 +107,22 @@ namespace RE
 				} while (x < gridLength);
 			}
 		}
-		if (const auto skyCell = worldSpace ? worldSpace->GetSkyCell() : nullptr; skyCell) {
-			skyCell->ForEachReference([&](TESObjectREFR& a_ref) {
-				return a_callback(a_ref);
-			});
+		if (TESWorldSpace* const ws = GetCurrentWorldSpace()) {
+			if (TESObjectCELL* const skyCell = ws ? ws->GetSkyCell() : nullptr; skyCell) {
+				skyCell->ForEachReference([&](TESObjectREFR* a_ref) {
+					return a_callback(a_ref);
+				});
+			}
 		}
 	}
 
-	void TES::ForEachReferenceInRange(TESObjectREFR* a_origin, float a_radius, std::function<BSContainer::ForEachResult(TESObjectREFR& a_ref)> a_callback)
+	void TES::ForEachReferenceInRange(TESObjectREFR* a_origin, float a_radius, const std::function<BSContainer::ForEachResult(TESObjectREFR* a_ref)>& a_callback) const
 	{
 		if (a_origin && a_radius > 0.0f) {
-			const auto originPos = a_origin->GetPosition();
+			const auto  originPos = a_origin->GetPosition();
 
 			if (interiorCell) {
-				interiorCell->ForEachReferenceInRange(originPos, a_radius, [&](TESObjectREFR& a_ref) {
+				interiorCell->ForEachReferenceInRange(originPos, a_radius, [&](TESObjectREFR* a_ref) {
 					return a_callback(a_ref);
 				});
 			} else {
@@ -69,7 +140,7 @@ namespace RE
 								if (const auto cellCoords = cell->GetCoordinates(); cellCoords) {
 									const NiPoint2 worldPos{ cellCoords->worldX, cellCoords->worldY };
 									if (worldPos.x < xPlus && (worldPos.x + 4096.0f) > xMinus && worldPos.y < yPlus && (worldPos.y + 4096.0f) > yMinus) {
-										cell->ForEachReferenceInRange(originPos, a_radius, [&](TESObjectREFR& a_ref) {
+										cell->ForEachReferenceInRange(originPos, a_radius, [&](TESObjectREFR* a_ref) {
 											return a_callback(a_ref);
 										});
 									}
@@ -82,13 +153,15 @@ namespace RE
 				}
 			}
 
-			if (const auto skyCell = worldSpace ? worldSpace->GetSkyCell() : nullptr; skyCell) {
-				skyCell->ForEachReferenceInRange(originPos, a_radius, [&](TESObjectREFR& a_ref) {
-					return a_callback(a_ref);
-				});
+			if (TESWorldSpace* const ws = GetCurrentWorldSpace()) {
+				if (TESObjectCELL* const skyCell = ws ? ws->GetSkyCell() : nullptr; skyCell) {
+					skyCell->ForEachReferenceInRange(originPos, a_radius, [&](TESObjectREFR* a_ref) {
+						return a_callback(a_ref);
+					});
+				}
 			}
 		} else {
-			ForEachReference([&](TESObjectREFR& a_ref) {
+			ForEachReference([&](TESObjectREFR* a_ref) {
 				return a_callback(a_ref);
 			});
 		}
