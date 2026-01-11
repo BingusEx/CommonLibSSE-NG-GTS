@@ -94,20 +94,29 @@ namespace SKSE
 	{
 		std::optional<std::filesystem::path> log_directory()
 		{
-			wchar_t*                                               buffer{ nullptr };
-			const auto                                             result = ::SHGetKnownFolderPath(::FOLDERID_Documents, ::KNOWN_FOLDER_FLAG::KF_FLAG_DEFAULT, nullptr, std::addressof(buffer));
+			wchar_t* buffer{ nullptr };
+			const auto result = ::SHGetKnownFolderPath(::FOLDERID_Documents, ::KNOWN_FOLDER_FLAG::KF_FLAG_DEFAULT, nullptr, std::addressof(buffer));
 			std::unique_ptr<wchar_t[], decltype(&::CoTaskMemFree)> knownPath(buffer, ::CoTaskMemFree);
-			if (!knownPath || result != S_OK) {
-				error("failed to get known folder path"sv);
+
+			if (!knownPath || result != 0) {
+				error("Something went wrong when trying to find the game's save data / log folder.");
 				return std::nullopt;
 			}
 
 			std::filesystem::path path = knownPath.get();
-			path /= "My Games";
+			path /= "My Games"sv;
+
 			if SKYRIM_REL_VR_CONSTEXPR (REL::Module::IsVR()) {
 				path /= "Skyrim VR";
-			} else {
-                path /= *REL::Relocation<const char**>(RELOCATION_ID(508778, 380738)).get();
+			} 
+			else {
+				//Fixes log directory on >= 1130+
+				if (REL::Module::get().version() >= RUNTIME_SSE_1_6_1130) {
+					path /= std::filesystem::exists("steam_api64.dll") ? "Skyrim Special Edition" : "Skyrim Special Edition GOG";
+				} 
+				else {
+					path /= *REL::Relocation<const char**>(RELOCATION_ID(508778, 380738)).get();
+				}
 			}
 			path /= "SKSE"sv;
 			return path;
