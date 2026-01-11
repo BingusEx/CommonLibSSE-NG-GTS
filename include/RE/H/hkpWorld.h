@@ -1,11 +1,14 @@
 #pragma once
 
+#include "RE/H/hkRefPtr.h"
 #include "RE/H/hkArray.h"
 #include "RE/H/hkMultiThreadCheck.h"
 #include "RE/H/hkReferencedObject.h"
 #include "RE/H/hkStepInfo.h"
 #include "RE/H/hkpSolverInfo.h"
 #include "RE/H/hkpWorldCinfo.h"
+#include "RE/H/hkpEntity.h"
+#include "RE/H/hkpRigidBody.h"
 
 namespace RE
 {
@@ -87,6 +90,20 @@ namespace RE
 			using func_t = decltype(&hkpWorld::CastRay);
 			REL::Relocation<func_t> func{ RELOCATION_ID(60551, 61399) };
 			return func(this, a_input, a_output);
+		}
+
+		inline void UpdateCollisionFilterOnEntity(hkpEntity* entity, hkpUpdateCollisionFilterOnEntityMode updateMode, hkpUpdateCollectionFilterMode updateShapeCollectionFilter)
+		{
+			typedef void (*DefUpdateCollisionFilterOnEntity)(hkpWorld*, hkpEntity*, hkpUpdateCollisionFilterOnEntityMode, hkpUpdateCollectionFilterMode);
+			REL::Relocation<DefUpdateCollisionFilterOnEntity> RealUpdateCollisionFilterOnEntity{ RELOCATION_ID(60509, 61321) };
+			RealUpdateCollisionFilterOnEntity(this, entity, updateMode, updateShapeCollectionFilter);
+		}
+
+		inline void UpdateCollisionFilterOnPhantom(hkpPhantom* phantom, hkpUpdateCollectionFilterMode updateShapeCollectionFilter)
+		{
+			typedef void (*DefUpdateCollisionFilterOnPhantom)(hkpWorld*, hkpPhantom*, hkpUpdateCollectionFilterMode);
+			REL::Relocation<DefUpdateCollisionFilterOnPhantom> RealUpdateCollisionFilterOnPhantom{ RELOCATION_ID(60509, 61321) };
+			RealUpdateCollisionFilterOnPhantom(this, phantom, updateShapeCollectionFilter);
 		}
 
 		// members

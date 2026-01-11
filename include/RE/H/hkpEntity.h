@@ -1,5 +1,6 @@
 #pragma once
 
+#include "RE/H/hkRefPtr.h"
 #include "RE/H/hkArray.h"
 #include "RE/H/hkBaseTypes.h"
 #include "RE/H/hkSmallArray.h"
@@ -19,6 +20,12 @@ namespace RE
 	class hkpEntityListener;
 	class hkpSimulationIsland;
 	struct hkConstraintInternal;
+
+	enum class hkpEntityActivation
+	{
+		kDoNotActivate,
+		kDoActivate
+	};
 
 	class hkpEntity : public hkpWorldObject
 	{

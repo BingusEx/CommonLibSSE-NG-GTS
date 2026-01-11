@@ -1,9 +1,23 @@
 #pragma once
 
+#include "RE/H/hkRefPtr.h"
 #include "RE/H/hkpEntity.h"
 
 namespace RE
 {
+
+	enum class hkpUpdateCollisionFilterOnEntityMode
+	{
+		kFullCheck,
+		kDisableEntityEntityCollisionsOnly
+	};
+
+	enum class hkpUpdateCollectionFilterMode
+	{
+		kIgnoreCollections,
+		kIncludeCollections,
+	};
+
 	class hkpRigidBody : public hkpEntity
 	{
 	public:
@@ -18,6 +32,8 @@ namespace RE
 
 		// add
 		virtual hkpRigidBody* Clone() const;  // 07
+
+		void SetMotionType(hkpMotion::MotionType a_newState, hkpEntityActivation a_preferredActivationState, hkpUpdateCollisionFilterOnEntityMode a_collisionFilterUpdateMode);
 	};
 	static_assert(sizeof(hkpRigidBody) == 0x2D0);
 }

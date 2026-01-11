@@ -49,6 +49,9 @@ namespace RE
 		virtual void GetAabbWorldspace(hkAabb& a_outAabb);                                     // 3B
 		virtual void Unk_3C(void);                                                             // 3C
 
+		void SetLinearImpulse(const hkVector4& a_impulse);
+		void SetAngularImpulse(const hkVector4& a_impulse);
+
 		// members
 		BSTArray<void*> unk28;  // 28 - array of smart ptrs to bhkConstraints
 	};

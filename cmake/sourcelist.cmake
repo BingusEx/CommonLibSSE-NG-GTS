@@ -399,6 +399,8 @@ set(SOURCES
 	include/RE/B/bhkThreadMemorySource.h
 	include/RE/B/bhkWorld.h
 	include/RE/B/bhkWorldObject.h
+	include/RE/B/bhkCharacterRigidBody.h
+	include/RE/B/bhkCharacterRigidBodyController.h
 	include/RE/C/CFilter.h
 	include/RE/C/CRC.h
 	include/RE/C/Calendar.h
@@ -895,6 +897,15 @@ set(SOURCES
 	include/RE/H/hkpWorldPostSimulationListener.h
 	include/RE/H/hkpWorldRayCastInput.h
 	include/RE/H/hkpWorldRayCastOutput.h
+	include/RE/H/hkaFootPlacementIKSolver.h
+	include/RE/H/hkbFootIKDriver.h
+	include/RE/H/hkpAllRayHitCollector.h
+	include/RE/H/hkpCharacterRigidBody.h
+	include/RE/H/hkpCharacterRigidBodyListener.h
+	include/RE/H/hkpConvexTransformShape.h
+	include/RE/H/hkpConvexVerticesConnectivity.h
+	include/RE/H/hkpConvexVerticesShape.h
+	include/RE/H/hkpTriangleShape.h
 	include/RE/I/IAIWorldLocationHandle.h
 	include/RE/I/IAnimationGraphManagerHolder.h
 	include/RE/I/IAnimationSetCallbackFunctor.h
@@ -1503,6 +1514,7 @@ set(SOURCES
 	src/RE/B/BookMenu.cpp
 	src/RE/B/BooksRead.cpp
 	src/RE/B/bhkCharProxyController.cpp
+	src/RE/B/bhkRigidBody.cpp
 	src/RE/C/Calendar.cpp
 	src/RE/C/ChestsLooted.cpp
 	src/RE/C/Color.cpp
@@ -1586,6 +1598,12 @@ set(SOURCES
 	src/RE/H/hkpCharacterProxyListener.cpp
 	src/RE/H/hkpMaterial.cpp
 	src/RE/H/hkpWorldObject.cpp
+	src/RE/H/hkpAllRayHitCollector.cpp
+	src/RE/H/hkpCapsuleShape.cpp
+	src/RE/H/hkpConvexShape.cpp
+	src/RE/H/hkpRigidBody.cpp
+	src/RE/H/hkpShape.cpp
+	src/RE/H/hkpSphereRepShape.cpp
 	src/RE/I/IAnimationGraphManagerHolder.cpp
 	src/RE/I/IFormFactory.cpp
 	src/RE/I/IFunction.cpp
