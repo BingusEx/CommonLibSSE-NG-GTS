@@ -1018,6 +1018,7 @@ set(SOURCES
 	include/RE/M/MemoryManager.h
 	include/RE/M/MemoryPage.h
 	include/RE/M/MenuControls.h
+	include/RE/M/MenuCursor.h
 	include/RE/M/MenuEventHandler.h
 	include/RE/M/MenuOpenCloseEvent.h
 	include/RE/M/MenuOpenHandler.h
@@ -1616,6 +1617,7 @@ set(SOURCES
 	src/RE/M/Main.cpp
 	src/RE/M/MemoryPage.cpp
 	src/RE/M/MenuControls.cpp
+	src/RE/M/MenuCursor.cpp
 	src/RE/M/MenuEventHandler.cpp
 	src/RE/M/Misc.cpp
 	src/RE/M/MissileProjectile.cpp
