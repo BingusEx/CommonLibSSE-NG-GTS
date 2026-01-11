@@ -992,6 +992,61 @@ namespace RE
 		return base ? base->crimeFaction : nullptr;
 	}
 
+	void Actor::SetCriticalStage(ACTOR_CRITICAL_STAGE a_stage)
+	{
+		if (a_stage < ACTOR_CRITICAL_STAGE::kTotal && a_stage >= ACTOR_CRITICAL_STAGE::kNone) {
+			typedef void (*DefSetCriticalStage)(Actor* actor, ACTOR_CRITICAL_STAGE stage);
+			static const REL::Relocation<DefSetCriticalStage> func{ RELOCATION_ID(36607, 37615) };
+			func(this, a_stage);
+		}
+	}
+
+	void Actor::Attacked(Actor* a_attackedBy)
+	{
+		typedef void (*DefAttacked)(Actor*, Actor*);
+		static const REL::Relocation<DefAttacked> SkyrimAttacked{ RELOCATION_ID(37672, 38626) };
+		SkyrimAttacked(this, a_attackedBy);
+	}
+
+	// This function starts combat and adds the assault bounty.
+	void Actor::StartCombat(Actor* a_combatTarget)
+	{
+		typedef void (*DefStartCombat)(Actor*, Actor*, Actor*, Actor*);
+		REL::Relocation<DefStartCombat> func{ RELOCATION_ID(36430, 37425) };  // sub_1405DE870 : 36430  (SE) ; 1406050c0 : 37425 (AE)
+		func(this, a_combatTarget, a_combatTarget, a_combatTarget);                     // Called from Attacked above at some point
+	}
+
+	// Applies the correct amount of damage and kills actors properly.
+	void Actor::ApplyDamage(Actor* a_attacker, float damage)
+	{
+		typedef void (*DefApplyDamage)(Actor*, float, Actor*, HitData*, TESObjectREFR*);
+		REL::Relocation<DefApplyDamage> func{ RELOCATION_ID(36345, 37335) };
+		func(this, damage, a_attacker, nullptr, nullptr);
+	}
+
+	void Actor::StaggerDirectional(Actor* a_staggeredBy, float a_power)
+	{
+		//SE: 1405FA1B0 : 36700 (Character *param_1,float param_2,Actor *param_3)
+		//AE: 140621d80 : 37710
+		typedef void (*DefStaggerActor_Directional)(Actor*, float, Actor*);
+		REL::Relocation<DefStaggerActor_Directional> func{ RELOCATION_ID(36700, 37710) };
+		func(this, a_power, a_staggeredBy);
+	}
+
+	ACTOR_COMBAT_STATE Actor::GetCombatState()
+	{
+		using DefGetCombatState = ACTOR_COMBAT_STATE(*)(Actor*);
+		REL::Relocation<DefGetCombatState> func{ RELOCATION_ID(37603, 38556) };
+		return func(this);
+	}
+
+	bool Actor::IsMoving()
+	{
+		using DefIsMoving = bool(*)(Actor*);
+		REL::Relocation<DefIsMoving> func{ RELOCATION_ID(36928, 37953) };
+		return func(this);
+	}
+
 #ifdef SKYRIM_CROSS_VR
 	void Actor::Unk_A2()
 	{

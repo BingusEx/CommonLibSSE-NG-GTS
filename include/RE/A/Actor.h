@@ -21,6 +21,7 @@
 #include "RE/M/MagicSystem.h"
 #include "RE/M/MagicTarget.h"
 #include "RE/N/NiSmartPointer.h"
+#include "RE/T/TESCombatEvent.h"
 #include "RE/T/TESNPC.h"
 #include "RE/T/TESObjectREFR.h"
 
@@ -577,11 +578,11 @@ namespace RE
 		void                                    SetRotationZ(float a_angle);
 		void                                    SetLifeState(ACTOR_LIFE_STATE a_lifeState);
 		void                                    StealAlarm(TESObjectREFR* a_ref, TESForm* a_object, std::int32_t a_num, std::int32_t a_total, TESForm* a_owner, bool a_allowWarning);
-		void                         StopAlarmOnActor();
+		void                                    StopAlarmOnActor();
 		void                                    StopInteractingQuick(bool a_unk02);
 		void                                    StopMoving(float a_delta);
 		void                                    SwitchRace(TESRace* a_race, bool a_player);
-		void                         TrespassAlarm(TESObjectREFR* a_ref, TESForm* a_ownership, std::int32_t a_crime);
+		void                                    TrespassAlarm(TESObjectREFR* a_ref, TESForm* a_ownership, std::int32_t a_crime);
 		void                                    UpdateArmorAbility(TESForm* a_armor, ExtraDataList* a_extraData);
 		void                                    Update3DModel();
 		void                                    UpdateHairColor();
@@ -590,6 +591,17 @@ namespace RE
 		void                                    VisitArmorAddon(TESObjectARMO* a_armor, TESObjectARMA* a_arma, std::function<void(bool a_firstPerson, NiAVObject& a_obj)> a_visitor);
 		bool                                    VisitFactions(std::function<bool(TESFaction* a_faction, std::int8_t a_rank)> a_visitor);
 		bool                                    WouldBeStealing(const TESObjectREFR* a_target) const;
+		
+		//New
+		void                                    SetCriticalStage(ACTOR_CRITICAL_STAGE a_stage);
+		void                                    Attacked(Actor* a_attackedBy);
+		void                                    StartCombat(Actor* a_combatTarget);
+		void                                    ApplyDamage(Actor* a_attacker, float damage);
+		void                                    StaggerDirectional(Actor* a_staggeredBy, float a_power);
+		ACTOR_COMBAT_STATE                      GetCombatState();
+		bool                                    IsMoving();
+		
+		
 
 		struct ACTOR_RUNTIME_DATA
 		{
