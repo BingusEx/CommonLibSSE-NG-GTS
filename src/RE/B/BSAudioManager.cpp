@@ -39,4 +39,13 @@ namespace RE
 		REL::Relocation<func_t> func{ RELOCATION_ID(66403, 67665) };
 		return func(this, a_soundHandle, a_editorID, a_flags);
 	}
+
+	void BSAudioManager::SetSoundHandleFrequency(std::uint32_t a_soundID, float a_freq)
+	{
+		if (a_soundID != 0xffffffff) {
+			using func_t = decltype(&BSAudioManager::SetSoundHandleFrequency);
+			REL::Relocation<func_t> func{ RELOCATION_ID(66422, 67685) };
+			func(this, a_soundID, a_freq);
+		}
+	}
 }

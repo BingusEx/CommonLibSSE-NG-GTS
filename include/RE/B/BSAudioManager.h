@@ -19,6 +19,7 @@ namespace RE
 		bool Play(BSISoundDescriptor* a_descriptor);
 		bool BuildSoundDataFromDescriptor(BSSoundHandle& a_soundHandle, BSISoundDescriptor* a_descriptor, std::uint32_t a_flags = 0x1A);
 		void BuildSoundDataFromEditorID(BSSoundHandle& a_soundHandle, const char* a_editorID, std::uint32_t a_flags);
+		void SetSoundHandleFrequency(std::uint32_t a_soundID, float a_freq);
 
 		// members
 		std::uint64_t                                  unk000;  // 000
