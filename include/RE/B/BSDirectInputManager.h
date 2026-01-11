@@ -1,10 +1,13 @@
 #pragma once
-
 #include "RE/B/BSTSingleton.h"
-#include <dinput.h>
 
 namespace RE
 {
+	class IDirectInputDevice8A;
+	class GUID;
+	class IDirectInput8A;
+	class DIDEVICEOBJECTDATA;
+
 	class BSDirectInputManager : public BSTSingletonSDM<BSDirectInputManager>
 	{
 	public:

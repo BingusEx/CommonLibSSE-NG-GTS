@@ -1,4 +1,5 @@
 #include "RE/B/BSDirectInputManager.h"
+#include <dinput.h>
 
 namespace RE
 {
