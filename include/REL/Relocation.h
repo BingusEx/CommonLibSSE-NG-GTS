@@ -1216,16 +1216,11 @@ namespace REL {
                 }
 
                 auto mapname = L"CommonLibSSEOffsets-v2-"s;
-				mapname += a_version.wstring();
-				const auto byteSize = static_cast<std::size_t>(header.address_count()) * sizeof(mapping_t);
+                mapname += a_version.wstring();
+                const auto byteSize = static_cast<std::size_t>(header.address_count()) * sizeof(mapping_t);
 				if (_mmap.open(mapname, byteSize)) {
-					// existing mapping: copy into owned storage and close the mapping to avoid use-after-unmap
-					auto ptr = static_cast<mapping_t*>(_mmap.data());
-					_id2offset_storage.assign(ptr, ptr + header.address_count());
-					_id2offset = { _id2offset_storage.data(), header.address_count() };
-					_mmap.close();
+					_id2offset = { static_cast<mapping_t*>(_mmap.data()), header.address_count() };
 				} else if (_mmap.create(mapname, byteSize)) {
-					// created mapping: write into the mapping, then copy into owned storage
 					_id2offset = { static_cast<mapping_t*>(_mmap.data()), header.address_count() };
 					unpack_file(in, header, a_failOnError);
 					std::sort(
@@ -1234,11 +1229,6 @@ namespace REL {
 						[](auto&& a_lhs, auto&& a_rhs) {
 							return a_lhs.id < a_rhs.id;
 						});
-					// copy into owned storage and close the mapping to avoid use-after-unmap in readers
-					_id2offset_storage.assign(_id2offset.begin(), _id2offset.end());
-					_id2offset = { _id2offset_storage.data(), static_cast<std::size_t>(header.address_count()) };
-					_mmap.close();
-					return true;
 				} else {
 					return stl::report_and_error("failed to create shared mapping"sv, a_failOnError);
 				}
@@ -1385,19 +1375,16 @@ namespace REL {
             return true;
         }
 
-		void clear()
-		{
-			_mmap.close();
-			_id2offset_storage.clear();
-			_id2offset = {};
-		}
+        void clear() {
+            _mmap.close();
+            _id2offset = {};
+        }
 
-        static IDDatabase              _instance;
-		static inline std::atomic_bool _initialized{ false };
-		static inline std::mutex       _initLock;
-		detail::memory_map             _mmap;
-		std::vector<mapping_t>         _id2offset_storage;
-		std::span<mapping_t>           _id2offset;
+        static IDDatabase _instance;
+        static inline std::atomic_bool _initialized{false};
+        static inline std::mutex _initLock;
+        detail::memory_map _mmap;
+        std::span<mapping_t> _id2offset;
     };
 
     class Offset {
