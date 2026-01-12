@@ -139,18 +139,18 @@ namespace RE
 		~ActorState() override;  // 00
 
 		// override (IMovementState)
-		void  Unk_01(void) override;          // 01 - { return 0; }
-		void  Unk_02(void) override;          // 02 - { return; }
-		void  Unk_03(void) override;          // 03 - { return; }
-		void  Unk_04(void) override;          // 04 - { return; }
-		float DoGetMovementSpeed() override;  // 05 - { return 0.0; }
-		void  Unk_06(void) override;          // 06 - { return 0.0; }
-		void  Unk_07(void) override;          // 07 - { return; }
-		void  Unk_08(void) override;          // 08 - { return 0; }
+		uint32_t DoGetNumericID() const override;                                        // 01 - { return 0; }
+		void     DoGetPathingLocation(BSPathingLocation& path_loc) const override;       // 02 - { return; }
+		void     DoGetLocation(NiPoint3& pos) const override;                            // 03 - { return; }
+		void     DoGetEulerAngles(NiPoint3& angles) const override;                      // 04 - { return; }
+		float    DoGetMovementSpeed() const override;                                    // 05 - { return 0.0; }
+		float    DoGetRotationSpeed() const override;                                    // 06 - { return 0.0; }
+		void     DoGetMovementRotation(NiPoint3& rotation) const override;               // 07 - { return; }
+		bool     DoGetCurrentMaxSpeeds(Movement::MaxSpeeds& max_speeds) const override;  // 08 - { return 0; }
 
 		// add
-		virtual void Unk_14(void);  // 14
-		virtual void Unk_15(void);  // 15
+		virtual bool SetSitSleepState(SIT_SLEEP_STATE state);  // 14
+		virtual bool SetWeaponMagicDrawn(bool val);            // 15
 
 		[[nodiscard]] ATTACK_STATE_ENUM GetAttackState() const noexcept { return actorState1.meleeAttackState; }
 		[[nodiscard]] FLY_STATE         GetFlyState() const noexcept { return actorState1.flyState; }

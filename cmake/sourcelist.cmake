@@ -980,6 +980,8 @@ set(SOURCES
 	include/RE/I/ItemCrafted.h
 	include/RE/I/ItemHarvested.h
 	include/RE/I/ItemList.h
+	include/RE/I/IMovementParameters.h
+	include/RE/I/IPipelineStageInterface.h
 	include/RE/I/ItemsPickpocketed.h
 	include/RE/J/JournalMenu.h
 	include/RE/J/JournalTab.h
@@ -1052,6 +1054,27 @@ set(SOURCES
 	include/RE/M/MovementHandler.h
 	include/RE/M/MoviePlayer.h
 	include/RE/M/MultiBoundMarkerData.h
+	include/RE/M/MovementActorAvoidanceParameters.h
+	include/RE/M/MovementAgent.h
+	include/RE/M/MovementArbiter.h
+	include/RE/M/MovementControllerActiveSetDescription.h
+	include/RE/M/MovementControllerSetDescriptions.h
+	include/RE/M/MovementHandlerAgent.h
+	include/RE/M/MovementHandlerAgentPlayerControls.h
+	include/RE/M/MovementHandlerAgentUpdateDataSmallDelta.h
+	include/RE/M/MovementHandlerOutputDataSmallDelta.h
+	include/RE/M/MovementHandlerUpdateDataSmallDelta.h
+	include/RE/M/MovementMessage.h
+	include/RE/M/MovementMessageFreezeDirection.h
+	include/RE/M/MovementPlannerAgent.h
+	include/RE/M/MovementPlannerAgentDirectControl.h
+	include/RE/M/MovementPlannerAgentReturnDataSmallDelta.h
+	include/RE/M/MovementPlannerUpdateDataSmallDelta.h
+	include/RE/M/MovementTweenerAgent.h
+	include/RE/M/MovementTweenerAgentNodeFollower.h
+	include/RE/M/MovementTweenerAgentOutputData.h
+	include/RE/M/MovementUtils.h
+	include/RE/M/MovementVector.h
 	include/RE/N/NativeFunction.h
 	include/RE/N/NativeFunctionBase.h
 	include/RE/N/NavMesh.h
@@ -1141,6 +1164,7 @@ set(SOURCES
 	include/RE/N/NiTransform.h
 	include/RE/N/NonActorMagicCaster.h
 	include/RE/N/NonActorMagicTarget.h
+	include/RE/N/NullMovementState.h
 	include/RE/O/Object.h
 	include/RE/O/ObjectTypeInfo.h
 	include/RE/O/OldMessageBoxCallback.h
@@ -1424,6 +1448,7 @@ set(SOURCES
 	include/RE/W/WeaponAnimationGraphManagerHolder.h
 	include/RE/W/WeatherType.h
 	include/RE/W/WorldSpaceMenu.h
+	include/RE/W/WeightedModifier.h
 	include/RE/Z/ZeroFunctionArguments.h
 	include/RE/Z/ZeroOverheadHeap.h
 	include/REL/Relocation.h
@@ -1623,7 +1648,8 @@ set(SOURCES
 	src/RE/I/InventoryEntryData.cpp
 	src/RE/I/ItemCrafted.cpp
 	src/RE/I/ItemHarvested.cpp
-	src/RE/I/ItemList.cpp
+	src/RE/I/IMovementState.cpp
+	src/RE/I/IPipelineStageInterface.cpp
 	src/RE/I/ItemsPickpocketed.cpp
 	src/RE/L/LevelIncrease.cpp
 	src/RE/L/LocalMapCamera.cpp
@@ -1640,6 +1666,12 @@ set(SOURCES
 	src/RE/M/MenuCursor.cpp
 	src/RE/M/MenuEventHandler.cpp
 	src/RE/M/Misc.cpp
+	src/RE/M/MovementAgent.cpp
+	src/RE/M/MovementControllerAI.cpp
+	src/RE/M/MovementHandlerAgent.cpp
+	src/RE/M/MovementPlannerAgent.cpp
+	src/RE/M/MovementTweenerAgent.cpp
+	src/RE/M/MovementUtils.cpp
 	src/RE/M/MissileProjectile.cpp
 	src/RE/N/NativeFunctionBase.cpp
 	src/RE/N/NiAVObject.cpp
@@ -1677,6 +1709,7 @@ set(SOURCES
 	src/RE/N/NiTexture.cpp
 	src/RE/N/NiTimeController.cpp
 	src/RE/N/NiTransform.cpp
+	src/RE/N/NullMovementState.cpp
 	src/RE/O/Object.cpp
 	src/RE/O/ObjectTypeInfo.cpp
 	src/RE/P/PackUnpack.cpp

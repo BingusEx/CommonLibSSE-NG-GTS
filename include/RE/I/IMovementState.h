@@ -1,38 +1,86 @@
 #pragma once
 
 #include "RE/I/IMovementInterface.h"
+#include "RE/I/IMovementParameters.h"
 
 namespace RE
 {
+	class BSPathingLocation;
+	class NiMatrix3;
 	class NiPoint3;
+	class NiTransform;
 
-	class IMovementState : public IMovementInterface
+	namespace Movement
+	{
+		struct mb_CurrentSpeeds;
+		struct MaxSpeeds;
+	}
+
+	struct IMovementState : public IMovementInterface
 	{
 	public:
 		inline static constexpr auto RTTI = RTTI_IMovementState;
 
-		~IMovementState() override;  // 00
+		// same as hkpCharacterStateType
+		enum CHARACTER_STATE : uint32_t
+		{
+			ON_GROUND = 0,
+			JUMPING = 1,
+			IN_AIR = 2,
+			CLIMBING = 3,
+			FLYING = 4,
+			USER_STATE_0 = 5,
+			USER_STATE_1 = 6,
+			USER_STATE_2 = 7,
+			USER_STATE_3 = 8,
+			USER_STATE_4 = 9,
+			USER_STATE_5 = 10,
+
+			MAX_STATE_ID = 11,
+		};
+
+		~IMovementState() override = default;  // 00
 
 		// add
-		virtual void  Unk_01(void) = 0;                                 // 01
-		virtual void  Unk_02(void) = 0;                                 // 02
-		virtual void  Unk_03(void) = 0;                                 // 03
-		virtual void  Unk_04(void) = 0;                                 // 04
-		virtual float DoGetMovementSpeed() = 0;                         // 05
-		virtual void  Unk_06(void) = 0;                                 // 06
-		virtual void  Unk_07(void) = 0;                                 // 07
-		virtual void  Unk_08(void) = 0;                                 // 08
-		virtual void  DoGetMovementRotation(NiPoint3& a_rotation) = 0;  // 09
-		virtual void  Unk_0A(void) = 0;                                 // 0A
-		virtual void  Unk_0B(void) = 0;                                 // 0B
-		virtual void  Unk_0C(void) = 0;                                 // 0C
-		virtual void  Unk_0D(void) = 0;                                 // 0D
-		virtual void  Unk_0E(void) = 0;                                 // 0E
-		virtual void  Unk_0F(void) = 0;                                 // 0F
-		virtual void  Unk_10(void) = 0;                                 // 10
-		virtual void  Unk_11(void) = 0;                                 // 11
-		virtual void  Unk_12(void) = 0;                                 // 12
-		virtual void  Unk_13(void) = 0;                                 // 13
+		virtual uint32_t             DoGetNumericID() const = 0;                                                 // 01
+		virtual void                 DoGetPathingLocation(BSPathingLocation& path_loc) const = 0;                // 02
+		virtual void                 DoGetLocation(NiPoint3& pos) const = 0;                                     // 03
+		virtual void                 DoGetEulerAngles(NiPoint3& angles) const = 0;                               // 04
+		virtual float                DoGetMovementSpeed() const = 0;                                             // 05
+		virtual float                DoGetRotationSpeed() const = 0;                                             // 06
+		virtual void                 DoGetMovementRotation(NiPoint3& rotation) const = 0;                        // 07
+		virtual bool                 DoGetCurrentMaxSpeeds(Movement::MaxSpeeds& max_speeds) const = 0;           // 08
+		virtual float                DoGetMovementRadius() const = 0;                                            // 09
+		virtual float                DoGetMovementWidth() const = 0;                                             // 0A
+		virtual float                DoGetMovementLength() const = 0;                                            // 0B
+		virtual float                DoGetMovementHeight() const = 0;                                            // 0C
+		virtual float                DoGetLookingHeight() const = 0;                                             // 0D
+		virtual bool                 DoMakeDefaultMovementParameters(IMovementParametersPtr& params) const = 0;  // 0E
+		virtual IMovementParameters& DoGetDefaultMovementParameters() const = 0;                                 // 0F
+		virtual bool                 mb_getCurSpeeds(Movement::mb_CurrentSpeeds& cur_speeds) const = 0;          // 10
+		virtual CHARACTER_STATE      DoGetCharacterState() const = 0;                                            // 11
+		virtual bool                 IsRiddenByPlayer() const = 0;                                               // 12
+		virtual bool                 DoGetUseVelocityObstacles() const = 0;                                      // 13
+
+		bool  CanStrafe() const;
+		void  GetCCRotation(NiMatrix3& ans) const;
+		void  GetCCTransform(NiTransform& ans) const;
+		bool  GetCurrentWalkRunPercent(float& ans_walk, float& ans_run) const;  // 88497
+		void  GetDirectionAngles(NiPoint3& ans) const;
+		void  GetDirectionVector(NiPoint3& ans, bool anglesHeadingOnly = false) const;
+		float GetMaxSpeed() const;
+		float GetMinSpeed() const;
+		float GetMovementHeading() const;
+		float DenormalizeAcceleration(float acc_norm) const;
+		float DenormalizeAngleAcceleration(float angle_accel_norm) const;
+		float DenormalizeRotateWhileMoving(float speed_norm) const;
+		float DenormalizeRotationSpeed(float rotspeed_norm) const;
+		float DenormalizeSpeed(float speed_norm) const;
+		float NormalizeAcceleration(float acc_denorm) const;
+		float NormalizeAngleAcceleration(float angle_accel_denorm) const;
+		float NormalizeRotateWhileMoving(float speed_denorm) const;
+		float NormalizeRotationSpeed(float rotspeed_denorm) const;
+		float NormalizeSpeed(float speed_denorm) const;
 	};
 	static_assert(sizeof(IMovementState) == 0x8);
 }
