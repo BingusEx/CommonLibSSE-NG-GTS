@@ -34,4 +34,11 @@ namespace RE
 		REL::Relocation<func_t> func{ RELOCATION_ID(68839, 70191) };
 		return func(this, a_object);
 	}
+
+	NiObject* NiObject::Clone(const RE::NiCloningProcess& a_cloningProcess)
+	{
+		using func_t = decltype(&NiObject::Clone);
+		REL::Relocation<func_t> func{ RELOCATION_ID(68836, 70188) };
+		return func(this, a_cloningProcess);
+	}
 }

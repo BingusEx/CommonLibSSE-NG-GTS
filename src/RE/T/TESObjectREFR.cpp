@@ -830,6 +830,13 @@ namespace RE
 		MoveTo_Impl(ObjectRefHandle(), GetParentCell(), GetWorldspace(), a_pos, data.angle);
 	}
 
+	float TESObjectREFR::GetRelevantWaterHeight()
+	{
+		using func_t = decltype(&TESObjectREFR::GetRelevantWaterHeight);
+		static REL::Relocation<func_t> func{ RELOCATION_ID(19411, 19839) };
+		return func(this);
+	}
+
 	InventoryChanges* TESObjectREFR::ForceInitInventoryChanges()
 	{
 		auto changes = MakeInventoryChanges();

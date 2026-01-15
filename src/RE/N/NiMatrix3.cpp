@@ -108,6 +108,12 @@ namespace RE
 		entry[2][2] = cosX * cosY;
 	}
 
+	void NiMatrix3::ToQuaternion(RE::NiQuaternion& quatOut) const
+	{
+		using func_t = void (*)(RE::NiQuaternion&, const RE::NiMatrix3&);
+		static REL::Relocation<func_t> func{ RELOCATION_ID(69467, 70844) };
+		func(quatOut, *this);
+	}
 
 	bool NiMatrix3::ToEulerAnglesZXY(NiPoint3& a_angle) const
 	{

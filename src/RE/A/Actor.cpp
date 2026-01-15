@@ -18,7 +18,6 @@
 #include "RE/M/MiddleHighProcessData.h"
 #include "RE/M/Misc.h"
 #include "RE/N/NiColor.h"
-#include "RE/N/NiMath.h"
 #include "RE/N/NiNode.h"
 #include "RE/N/NiPoint3.h"
 #include "RE/P/ProcessLists.h"
@@ -73,14 +72,14 @@ namespace RE
 	bool Actor::AddSpell(SpellItem* a_spell)
 	{
 		using func_t = decltype(&Actor::AddSpell);
-		REL::Relocation<func_t> func{ Offset::Actor::AddSpell };
+		Relocation<func_t> func{ Offset::Actor::AddSpell };
 		return func(this, a_spell);
 	}
 
 	void Actor::AddToFaction(TESFaction* a_faction, std::int8_t a_rank)
 	{
 		using func_t = decltype(&Actor::AddToFaction);
-		REL::Relocation<func_t> func{ RELOCATION_ID(36678, 37686) };
+		Relocation<func_t> func{ RELOCATION_ID(36678, 37686) };
 		return func(this, a_faction, a_rank);
 	}
 
@@ -107,7 +106,7 @@ namespace RE
 	bool Actor::CanAttackActor(Actor* a_actor)
 	{
 		using func_t = decltype(&Actor::CanAttackActor);
-		REL::Relocation<func_t> func{ RELOCATION_ID(36532, 37532) };
+		Relocation<func_t> func{ RELOCATION_ID(36532, 37532) };
 		return func(this, a_actor);
 	}
 
@@ -172,28 +171,28 @@ namespace RE
 	bool Actor::Decapitate()
 	{
 		using func_t = decltype(&Actor::Decapitate);
-		REL::Relocation<func_t> func{ RELOCATION_ID(36631, 37639) };
+		Relocation<func_t> func{ RELOCATION_ID(36631, 37639) };
 		return func(this);
 	}
 
 	void Actor::DeselectSpell(SpellItem* a_spell)
 	{
 		using func_t = decltype(&Actor::DeselectSpell);
-		REL::Relocation<func_t> func{ RELOCATION_ID(37820, 38769) };
+		Relocation<func_t> func{ RELOCATION_ID(37820, 38769) };
 		return func(this, a_spell);
 	}
 
 	void Actor::DispelWornItemEnchantments()
 	{
 		using func_t = decltype(&Actor::DispelWornItemEnchantments);
-		REL::Relocation<func_t> func{ Offset::Actor::DispelWornItemEnchantments };
+		Relocation<func_t> func{ Offset::Actor::DispelWornItemEnchantments };
 		return func(this);
 	}
 
 	void Actor::DoReset3D(bool a_updateWeight)
 	{
 		using func_t = decltype(&Actor::DoReset3D);
-		REL::Relocation<func_t> func{ Offset::Actor::DoReset3D };
+		Relocation<func_t> func{ Offset::Actor::DoReset3D };
 		return func(this, a_updateWeight);
 	}
 
@@ -212,14 +211,14 @@ namespace RE
 	void Actor::EndInterruptPackage(bool a_skipDialogue)
 	{
 		using func_t = decltype(&Actor::EndInterruptPackage);
-		REL::Relocation<func_t> func{ RELOCATION_ID(36475, 37474) };
+		Relocation<func_t> func{ RELOCATION_ID(36475, 37474) };
 		return func(this, a_skipDialogue);
 	}
 
 	void Actor::EvaluatePackage(bool a_immediate, bool a_resetAI)
 	{
 		using func_t = decltype(&Actor::EvaluatePackage);
-		REL::Relocation<func_t> func{ RELOCATION_ID(36407, 37401) };
+		Relocation<func_t> func{ RELOCATION_ID(36407, 37401) };
 		return func(this, a_immediate, a_resetAI);
 	}
 
@@ -243,7 +242,7 @@ namespace RE
 	float Actor::GetActorValueModifier(ACTOR_VALUE_MODIFIER a_modifier, ActorValue a_value) const
 	{
 		using func_t = decltype(&Actor::GetActorValueModifier);
-		REL::Relocation<func_t> func{ RELOCATION_ID(37524, 38469) };
+		Relocation<func_t> func{ RELOCATION_ID(37524, 38469) };
 		return func(this, a_modifier, a_value);
 	}
 
@@ -282,7 +281,7 @@ namespace RE
 	uint32_t Actor::GetCollisionFilterInfo(uint32_t& a_outCollisionFilterInfo)
 	{
 		using func_t = decltype(&Actor::GetCollisionFilterInfo);
-		REL::Relocation<func_t> func{ RELOCATION_ID(36559, 37560) };
+		Relocation<func_t> func{ RELOCATION_ID(36559, 37560) };
 		return func(this, a_outCollisionFilterInfo);
 	}
 
@@ -407,21 +406,21 @@ namespace RE
 	std::uint16_t Actor::GetLevel() const
 	{
 		using func_t = decltype(&Actor::GetLevel);
-		REL::Relocation<func_t> func{ Offset::Actor::GetLevel };
+		Relocation<func_t> func{ Offset::Actor::GetLevel };
 		return func(this);
 	}
 
 	bool Actor::GetMount(NiPointer<Actor>& a_outMount)
 	{
 		using func_t = decltype(&Actor::GetMount);
-		REL::Relocation<func_t> func{ RELOCATION_ID(37757, 38702) };
+		Relocation<func_t> func{ RELOCATION_ID(37757, 38702) };
 		return func(this, a_outMount);
 	}
 
 	bool Actor::GetMountedBy(NiPointer<Actor>& a_outRider)
 	{
 		using func_t = decltype(&Actor::GetMountedBy);
-		REL::Relocation<func_t> func{ RELOCATION_ID(37758, 38703) };
+		Relocation<func_t> func{ RELOCATION_ID(37758, 38703) };
 		return func(this, a_outRider);
 	}
 
@@ -449,7 +448,7 @@ namespace RE
 	bool Actor::GetRider(NiPointer<Actor>& a_outRider)
 	{
 		using func_t = decltype(&Actor::GetRider);
-		REL::Relocation<func_t> func{ RELOCATION_ID(37758, 38703) };
+		Relocation<func_t> func{ RELOCATION_ID(37758, 38703) };
 		return func(this, a_outRider);
 	}
 
@@ -474,7 +473,7 @@ namespace RE
 	SOUL_LEVEL Actor::GetSoulSize() const
 	{
 		using func_t = decltype(&Actor::GetSoulSize);
-		REL::Relocation<func_t> func{ RELOCATION_ID(37862, 38817) };
+		Relocation<func_t> func{ RELOCATION_ID(37862, 38817) };
 		return func(this);
 	}
 
@@ -499,7 +498,7 @@ namespace RE
 	float Actor::GetWarmthRating() const
 	{
 		using func_t = decltype(&Actor::GetWarmthRating);
-		REL::Relocation<func_t> func{ RELOCATION_ID(25834, 26394) };
+		Relocation<func_t> func{ RELOCATION_ID(25834, 26394) };
 		return func(this);
 	}
 
@@ -547,35 +546,35 @@ namespace RE
 	bool Actor::HasLineOfSight(TESObjectREFR* a_ref, bool& a_arg2)
 	{
 		using func_t = decltype(&Actor::HasLineOfSight);
-		REL::Relocation<func_t> func{ RELOCATION_ID(53029, 53829) };
+		Relocation<func_t> func{ RELOCATION_ID(53029, 53829) };
 		return func(this, a_ref, a_arg2);
 	}
 
 	bool Actor::HasPerk(BGSPerk* a_perk) const
 	{
 		using func_t = decltype(&Actor::HasPerk);
-		REL::Relocation<func_t> func{ Offset::Actor::HasPerk };
+		Relocation<func_t> func{ Offset::Actor::HasPerk };
 		return func(this, a_perk);
 	}
 
 	bool Actor::HasSpell(SpellItem* a_spell) const
 	{
 		using func_t = decltype(&Actor::HasSpell);
-		REL::Relocation<func_t> func{ RELOCATION_ID(37828, 38782) };
+		Relocation<func_t> func{ RELOCATION_ID(37828, 38782) };
 		return func(this, a_spell);
 	}
 
 	void Actor::InterruptCast(bool a_restoreMagicka) const
 	{
 		using func_t = decltype(&Actor::InterruptCast);
-		REL::Relocation<func_t> func{ RELOCATION_ID(37808, 38757) };
+		Relocation<func_t> func{ RELOCATION_ID(37808, 38757) };
 		return func(this, a_restoreMagicka);
 	}
 
 	bool Actor::IsAttacking() const
 	{
 		using func_t = decltype(&Actor::IsAttacking);
-		REL::Relocation<func_t> func{ RELOCATION_ID(37637, 38590) };
+		Relocation<func_t> func{ RELOCATION_ID(37637, 38590) };
 		return func(this);
 	}
 
@@ -609,14 +608,14 @@ namespace RE
 	bool Actor::IsBlocking() const
 	{
 		using func_t = decltype(&Actor::IsBlocking);
-		REL::Relocation<func_t> func{ RELOCATION_ID(36927, 37952) };
+		Relocation<func_t> func{ RELOCATION_ID(36927, 37952) };
 		return func(this);
 	}
 
 	bool Actor::IsCasting(MagicItem* a_spell) const
 	{
 		using func_t = decltype(&Actor::IsCasting);
-		REL::Relocation<func_t> func{ RELOCATION_ID(37810, 38759) };
+		Relocation<func_t> func{ RELOCATION_ID(37810, 38759) };
 		return func(this, a_spell);
 	}
 
@@ -647,7 +646,7 @@ namespace RE
 	bool Actor::IsGhost() const
 	{
 		using func_t = decltype(&Actor::IsGhost);
-		REL::Relocation<func_t> func{ Offset::Actor::GetGhost };
+		Relocation<func_t> func{ Offset::Actor::GetGhost };
 		return func(this);
 	}
 
@@ -659,28 +658,28 @@ namespace RE
 	bool Actor::IsHostileToActor(Actor* a_actor)
 	{
 		using func_t = decltype(&Actor::IsHostileToActor);
-		REL::Relocation<func_t> func{ Offset::Actor::GetHostileToActor };
+		Relocation<func_t> func{ Offset::Actor::GetHostileToActor };
 		return func(this, a_actor);
 	}
 
 	bool Actor::IsLimbGone(std::uint32_t a_limb)
 	{
 		using func_t = decltype(&Actor::IsLimbGone);
-		REL::Relocation<func_t> func{ RELOCATION_ID(19338, 19765) };
+		Relocation<func_t> func{ RELOCATION_ID(19338, 19765) };
 		return func(this, a_limb);
 	}
 
 	bool Actor::IsInMidair() const
 	{
 		using func_t = decltype(&Actor::IsInMidair);
-		REL::Relocation<func_t> func{ RELOCATION_ID(36259, 37243) };
+		Relocation<func_t> func{ RELOCATION_ID(36259, 37243) };
 		return func(this);
 	}
 
 	bool Actor::IsInRagdollState() const
 	{
 		using func_t = decltype(&Actor::IsInRagdollState);
-		REL::Relocation<func_t> func{ RELOCATION_ID(36492, 37491) };
+		Relocation<func_t> func{ RELOCATION_ID(36492, 37491) };
 		return func(this);
 	}
 
@@ -692,7 +691,7 @@ namespace RE
 	bool Actor::IsOverEncumbered() const
 	{
 		using func_t = decltype(&Actor::IsOverEncumbered);
-		REL::Relocation<func_t> func{ RELOCATION_ID(36457, 37453) };
+		Relocation<func_t> func{ RELOCATION_ID(36457, 37453) };
 		return func(this);
 	}
 
@@ -709,7 +708,7 @@ namespace RE
 	bool Actor::IsRunning() const
 	{
 		using func_t = decltype(&Actor::IsRunning);
-		REL::Relocation<func_t> func{ Offset::Actor::IsRunning };
+		Relocation<func_t> func{ Offset::Actor::IsRunning };
 		return func(this);
 	}
 
@@ -744,7 +743,7 @@ namespace RE
 	void Actor::KillImmediate()
 	{
 		using func_t = decltype(&Actor::KillImmediate);
-		REL::Relocation<func_t> func{ RELOCATION_ID(36723, 37735) };
+		Relocation<func_t> func{ RELOCATION_ID(36723, 37735) };
 		return func(this);
 	}
 
@@ -778,42 +777,42 @@ namespace RE
 	bool Actor::RemoveSpell(SpellItem* a_spell)
 	{
 		using func_t = decltype(&Actor::RemoveSpell);
-		REL::Relocation<func_t> func{ RELOCATION_ID(37772, 38717) };
+		Relocation<func_t> func{ RELOCATION_ID(37772, 38717) };
 		return func(this, a_spell);
 	}
 
 	std::int32_t Actor::RequestDetectionLevel(Actor* a_target, DETECTION_PRIORITY a_priority)
 	{
 		using func_t = decltype(&Actor::RequestDetectionLevel);
-		REL::Relocation<func_t> func{ Offset::Actor::RequestDetectionLevel };
+		Relocation<func_t> func{ Offset::Actor::RequestDetectionLevel };
 		return func(this, a_target, a_priority);
 	}
 
 	void Actor::SetRotationX(float a_angle)
 	{
 		using func_t = decltype(&Actor::SetRotationX);
-		REL::Relocation<func_t> func{ RELOCATION_ID(36602, 37610) };
+		Relocation<func_t> func{ RELOCATION_ID(36602, 37610) };
 		return func(this, a_angle);
 	}
 
 	void Actor::SetRotationZ(float a_angle)
 	{
 		using func_t = decltype(&Actor::SetRotationZ);
-		REL::Relocation<func_t> func{ RELOCATION_ID(36248, 37230) };
+		Relocation<func_t> func{ RELOCATION_ID(36248, 37230) };
 		return func(this, a_angle);
 	}
 
 	void Actor::SetLifeState(ACTOR_LIFE_STATE a_lifeState)
 	{
 		using func_t = decltype(&Actor::SetLifeState);
-		REL::Relocation<func_t> func{ RELOCATION_ID(36604, 37612) };
+		Relocation<func_t> func{ RELOCATION_ID(36604, 37612) };
 		return func(this, a_lifeState);
 	}
 
 	void Actor::StealAlarm(TESObjectREFR* a_ref, TESForm* a_object, std::int32_t a_num, std::int32_t a_total, TESForm* a_owner, bool a_allowWarning)
 	{
 		using func_t = decltype(&Actor::StealAlarm);
-		REL::Relocation<func_t> func{ RELOCATION_ID(36427, 37422) };
+		Relocation<func_t> func{ RELOCATION_ID(36427, 37422) };
 		return func(this, a_ref, a_object, a_num, a_total, a_owner, a_allowWarning);
 	}
 
@@ -830,35 +829,35 @@ namespace RE
 	void Actor::StopInteractingQuick(bool a_unk02)
 	{
 		using func_t = decltype(&Actor::StopInteractingQuick);
-		REL::Relocation<func_t> func{ RELOCATION_ID(37752, 38697) };
+		Relocation<func_t> func{ RELOCATION_ID(37752, 38697) };
 		return func(this, a_unk02);
 	}
 
 	void Actor::StopMoving(float a_delta)
 	{
 		using func_t = decltype(&Actor::StopMoving);
-		REL::Relocation<func_t> func{ RELOCATION_ID(36801, 37817) };
+		Relocation<func_t> func{ RELOCATION_ID(36801, 37817) };
 		return func(this, a_delta);
 	}
 
 	void Actor::SwitchRace(TESRace* a_race, bool a_player)
 	{
 		using func_t = decltype(&Actor::SwitchRace);
-		REL::Relocation<func_t> func{ Offset::Actor::SwitchRace };
+		Relocation<func_t> func{ Offset::Actor::SwitchRace };
 		return func(this, a_race, a_player);
 	}
 
 	void Actor::TrespassAlarm(TESObjectREFR* a_ref, TESForm* a_ownership, std::int32_t a_crime)
 	{
 		using func_t = decltype(&Actor::TrespassAlarm);
-		REL::Relocation<func_t> func{ RELOCATION_ID(36432, 37427) };
+		Relocation<func_t> func{ RELOCATION_ID(36432, 37427) };
 		return func(this, a_ref, a_ownership, a_crime);
 	}
 
 	void Actor::UpdateArmorAbility(TESForm* a_armor, ExtraDataList* a_extraData)
 	{
 		using func_t = decltype(&Actor::UpdateArmorAbility);
-		REL::Relocation<func_t> func{ Offset::Actor::UpdateArmorAbility };
+		Relocation<func_t> func{ Offset::Actor::UpdateArmorAbility };
 		return func(this, a_armor, a_extraData);
 	}
 
@@ -913,11 +912,11 @@ namespace RE
 	void Actor::UpdateWeaponAbility(TESForm* a_weapon, ExtraDataList* a_extraData, bool a_leftHand)
 	{
 		using func_t = decltype(&Actor::UpdateWeaponAbility);
-		REL::Relocation<func_t> func{ Offset::Actor::UpdateWeaponAbility };
+		Relocation<func_t> func{ Offset::Actor::UpdateWeaponAbility };
 		return func(this, a_weapon, a_extraData, a_leftHand);
 	}
 
-	void Actor::VisitArmorAddon(TESObjectARMO* a_armor, TESObjectARMA* a_arma, std::function<void(bool a_firstPerson, NiAVObject& a_obj)> a_visitor)
+	void Actor::VisitArmorAddon(TESObjectARMO* a_armor, TESObjectARMA* a_arma, const std::function<void(bool a_firstPerson, NiAVObject& a_obj)>& a_visitor) const
 	{
 		enum
 		{
@@ -973,7 +972,7 @@ namespace RE
 	void Actor::CalculateCurrentVendorFaction() const
 	{
 		using func_t = decltype(&Actor::CalculateCurrentVendorFaction);
-		REL::Relocation<func_t> func{ RELOCATION_ID(36392, 37383) };
+		Relocation<func_t> func{ RELOCATION_ID(36392, 37383) };
 		return func(this);
 	}
 
@@ -996,7 +995,7 @@ namespace RE
 	{
 		if (a_stage < ACTOR_CRITICAL_STAGE::kTotal && a_stage >= ACTOR_CRITICAL_STAGE::kNone) {
 			typedef void (*DefSetCriticalStage)(Actor* actor, ACTOR_CRITICAL_STAGE stage);
-			static const REL::Relocation<DefSetCriticalStage> func{ RELOCATION_ID(36607, 37615) };
+			static const Relocation<DefSetCriticalStage> func{ RELOCATION_ID(36607, 37615) };
 			func(this, a_stage);
 		}
 	}
@@ -1004,7 +1003,7 @@ namespace RE
 	void Actor::Attacked(Actor* a_attackedBy)
 	{
 		typedef void (*DefAttacked)(Actor*, Actor*);
-		static const REL::Relocation<DefAttacked> SkyrimAttacked{ RELOCATION_ID(37672, 38626) };
+		static const Relocation<DefAttacked> SkyrimAttacked{ RELOCATION_ID(37672, 38626) };
 		SkyrimAttacked(this, a_attackedBy);
 	}
 
@@ -1012,7 +1011,7 @@ namespace RE
 	void Actor::StartCombat(Actor* a_combatTarget)
 	{
 		typedef void (*DefStartCombat)(Actor*, Actor*, Actor*, Actor*);
-		REL::Relocation<DefStartCombat> func{ RELOCATION_ID(36430, 37425) };  // sub_1405DE870 : 36430  (SE) ; 1406050c0 : 37425 (AE)
+		static const Relocation<DefStartCombat> func{ RELOCATION_ID(36430, 37425) };  // sub_1405DE870 : 36430  (SE) ; 1406050c0 : 37425 (AE)
 		func(this, a_combatTarget, a_combatTarget, a_combatTarget);                     // Called from Attacked above at some point
 	}
 
@@ -1020,7 +1019,7 @@ namespace RE
 	void Actor::ApplyDamage(Actor* a_attacker, float damage)
 	{
 		typedef void (*DefApplyDamage)(Actor*, float, Actor*, HitData*, TESObjectREFR*);
-		REL::Relocation<DefApplyDamage> func{ RELOCATION_ID(36345, 37335) };
+		static const Relocation<DefApplyDamage> func{ RELOCATION_ID(36345, 37335) };
 		func(this, damage, a_attacker, nullptr, nullptr);
 	}
 
@@ -1029,23 +1028,24 @@ namespace RE
 		//SE: 1405FA1B0 : 36700 (Character *param_1,float param_2,Actor *param_3)
 		//AE: 140621d80 : 37710
 		typedef void (*DefStaggerActor_Directional)(Actor*, float, Actor*);
-		REL::Relocation<DefStaggerActor_Directional> func{ RELOCATION_ID(36700, 37710) };
+		static Relocation<DefStaggerActor_Directional> func{ RELOCATION_ID(36700, 37710) };
 		func(this, a_power, a_staggeredBy);
 	}
 
 	ACTOR_COMBAT_STATE Actor::GetCombatState()
 	{
 		using DefGetCombatState = ACTOR_COMBAT_STATE(*)(Actor*);
-		REL::Relocation<DefGetCombatState> func{ RELOCATION_ID(37603, 38556) };
+		static Relocation<DefGetCombatState> func{ RELOCATION_ID(37603, 38556) };
 		return func(this);
 	}
 
 	bool Actor::IsMoving()
 	{
 		using DefIsMoving = bool(*)(Actor*);
-		REL::Relocation<DefIsMoving> func{ RELOCATION_ID(36928, 37953) };
+		static Relocation<DefIsMoving> func{ RELOCATION_ID(36928, 37953) };
 		return func(this);
 	}
+
 
 #ifdef SKYRIM_CROSS_VR
 	void Actor::Unk_A2()

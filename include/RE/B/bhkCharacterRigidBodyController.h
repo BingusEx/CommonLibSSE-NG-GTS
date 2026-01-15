@@ -17,9 +17,9 @@ namespace RE
 	class hkpSimpleConstraintContactMgr;
 
 	class bhkCharRigidBodyController :
-		public bhkCharacterController,  // 00
-		public hkpCharacterRigidBodyListener
-	{  // 330
+		public bhkCharacterController,       // 00
+		public hkpCharacterRigidBodyListener // 330
+	{  
 
 	public:
 		inline static constexpr auto RTTI = RTTI_bhkCharRigidBodyController;

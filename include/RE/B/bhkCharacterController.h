@@ -91,6 +91,13 @@ namespace RE
 
 		inline void GetPosition(hkVector4& a_pos, bool a_applyCenterOffset) const { return GetPositionImpl(a_pos, a_applyCenterOffset); }
 
+		inline void ToggleCharacterBumper(bool a_enable)
+		{
+			using DefTCB = void (*)(bhkCharacterController*, bool);
+			REL::Relocation<DefTCB> func{ RELOCATION_ID(76429, 78268) };
+			func(this, a_enable);
+		}
+
 		// members
 		//std::uint64_t						pad068;						// 068
 		hkVector4                                        forwardVec;                 // 070

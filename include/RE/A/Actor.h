@@ -13,7 +13,6 @@
 #include "RE/B/BSTEvent.h"
 #include "RE/B/BSTList.h"
 #include "RE/B/BSTSmartPointer.h"
-#include "RE/B/BSTTuple.h"
 #include "RE/D/DetectionPriorities.h"
 #include "RE/E/EmotionTypes.h"
 #include "RE/F/FormTypes.h"
@@ -500,7 +499,7 @@ namespace RE
 		void                                    DispelWornItemEnchantments();
 		void                                    DoReset3D(bool a_updateWeight);
 		void                                    EnableAI(bool a_enable);
-		void                         EndInterruptPackage(bool a_skipDialogue);
+		void                                    EndInterruptPackage(bool a_skipDialogue);
 		void                                    EvaluatePackage(bool a_immediate = false, bool a_resetAI = false);
 		[[nodiscard]] TESNPC*                   GetActorBase();
 		[[nodiscard]] const TESNPC*             GetActorBase() const;
@@ -509,12 +508,12 @@ namespace RE
 		[[nodiscard]] InventoryEntryData*       GetAttackingWeapon();
 		[[nodiscard]] const InventoryEntryData* GetAttackingWeapon() const;
 		[[nodiscard]] bhkCharacterController*   GetCharController() const;
-		uint32_t                  GetCollisionFilterInfo(uint32_t& a_outCollisionFilterInfo);
+		uint32_t                                GetCollisionFilterInfo(uint32_t& a_outCollisionFilterInfo);
 		[[nodiscard]] NiPointer<Actor>          GetCommandingActor() const;
 		[[nodiscard]] TESFaction*               GetCrimeFaction();
 		[[nodiscard]] const TESFaction*         GetCrimeFaction() const;
-		[[nodiscard]] TESPackage*                  GetCurrentPackage();
-		[[nodiscard]] const TESPackage*            GetCurrentPackage() const;
+		[[nodiscard]] TESPackage*               GetCurrentPackage();
+		[[nodiscard]] const TESPackage*         GetCurrentPackage() const;
 		[[nodiscard]] InventoryEntryData*       GetEquippedEntryData(bool a_leftHand) const;
 		[[nodiscard]] TESForm*                  GetEquippedObject(bool a_leftHand) const;
 		[[nodiscard]] std::int32_t              GetGoldAmount();
@@ -563,7 +562,7 @@ namespace RE
 		[[nodiscard]] bool                      IsOverEncumbered() const;
 		[[nodiscard]] bool                      IsPlayerTeammate() const;
 		[[nodiscard]] float                     IsPointDeepUnderWater(float a_zPos, TESObjectCELL* a_cell);
-		[[nodiscard]] bool                         IsProtected() const;
+		[[nodiscard]] bool                      IsProtected() const;
 		[[nodiscard]] bool                      IsRunning() const;
 		[[nodiscard]] bool                      IsSneaking() const;
 		[[nodiscard]] bool                      IsPointSubmergedMoreThan(const NiPoint3& a_pos, TESObjectCELL* a_cell, float a_waterLevel);
@@ -588,7 +587,7 @@ namespace RE
 		void                                    UpdateHairColor();
 		void                                    UpdateSkinColor();
 		void                                    UpdateWeaponAbility(TESForm* a_weapon, ExtraDataList* a_extraData, bool a_leftHand);
-		void                                    VisitArmorAddon(TESObjectARMO* a_armor, TESObjectARMA* a_arma, std::function<void(bool a_firstPerson, NiAVObject& a_obj)> a_visitor);
+		void                                    VisitArmorAddon(TESObjectARMO* a_armor, TESObjectARMA* a_arma, const std::function<void(bool a_firstPerson, NiAVObject& a_obj)>& a_visitor) const;
 		bool                                    VisitFactions(std::function<bool(TESFaction* a_faction, std::int8_t a_rank)> a_visitor);
 		bool                                    WouldBeStealing(const TESObjectREFR* a_target) const;
 		
@@ -600,7 +599,6 @@ namespace RE
 		void                                    StaggerDirectional(Actor* a_staggeredBy, float a_power);
 		ACTOR_COMBAT_STATE                      GetCombatState();
 		bool                                    IsMoving();
-		
 		
 
 		struct ACTOR_RUNTIME_DATA

@@ -489,9 +489,17 @@ namespace RE::Offset
 		constexpr auto Singleton = RELOCATION_ID(516458, 402638);
 	}
 
+	namespace Havok
+	{
+		constexpr auto HKMemRouterTlsIndex = RELOCATION_ID(520865, 407383);
+		constexpr auto WorldScale = RELOCATION_ID(231896, 188105);
+		constexpr auto WorldScaleInverse = RELOCATION_ID(230692, 187407);
+	}
+
 	constexpr auto CreateRefHandle = RELOCATION_ID(12193, 12326);
 	constexpr auto DebugNotification = RELOCATION_ID(52050, 52933);
 	constexpr auto LookupReferenceByHandle = RELOCATION_ID(12204, 12332);
 	constexpr auto PlaySound = RELOCATION_ID(52054, 52939);
 	constexpr auto TlsIndex = RELOCATION_ID(528600, 415542);
+
 }

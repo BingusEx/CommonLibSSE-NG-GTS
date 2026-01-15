@@ -2,6 +2,7 @@
 
 namespace RE
 {
+	class NiQuaternion;
 	class NiPoint3;
 
 	class NiMatrix3
@@ -32,6 +33,9 @@ namespace RE
 		void      EulerAnglesToAxesZXY(float a_xAngle, float a_yAngle, float a_zAngle);
 		void      SetEulerAnglesXYZ(const NiPoint3& a_point);
 		void      SetEulerAnglesXYZ(float a_x, float a_y, float a_z);
+		void      ToQuaternion(RE::NiQuaternion& quatOut) const;
+
+
 		NiMatrix3 Transpose() const;
 
 		bool      operator==(const NiMatrix3& a_rhs) const;
