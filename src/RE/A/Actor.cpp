@@ -1016,11 +1016,11 @@ namespace RE
 	}
 
 	// Applies the correct amount of damage and kills actors properly.
-	void Actor::ApplyDamage(Actor* a_attacker, float damage)
+	void Actor::TakeDamage(Actor* a_attacker, float damage, bool a_dontAdjustDifficulty)
 	{
-		typedef void (*DefApplyDamage)(Actor*, float, Actor*, HitData*, TESObjectREFR*);
+		typedef void (*DefApplyDamage)(Actor*, float, Actor*, bool);
 		static const Relocation<DefApplyDamage> func{ RELOCATION_ID(36345, 37335) };
-		func(this, damage, a_attacker, nullptr, nullptr);
+		func(this, damage, a_attacker, a_dontAdjustDifficulty);
 	}
 
 	void Actor::StaggerDirectional(Actor* a_staggeredBy, float a_power)

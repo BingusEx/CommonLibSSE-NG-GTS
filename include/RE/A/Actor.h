@@ -595,7 +595,7 @@ namespace RE
 		void                                    SetCriticalStage(ACTOR_CRITICAL_STAGE a_stage);
 		void                                    Attacked(Actor* a_attackedBy);
 		void                                    StartCombat(Actor* a_combatTarget);
-		void                                    ApplyDamage(Actor* a_attacker, float damage);
+		void                                    TakeDamage(Actor* a_attacker, float damage, bool a_dontAdjustDifficulty);
 		void                                    StaggerDirectional(Actor* a_staggeredBy, float a_power);
 		ACTOR_COMBAT_STATE                      GetCombatState();
 		bool                                    IsMoving();
