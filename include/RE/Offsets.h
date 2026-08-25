@@ -152,7 +152,7 @@ namespace RE::Offset
 
 	namespace Console
 	{
-		constexpr auto SelectedRef = RELOCATION_ID(519394, 405935);
+		constexpr auto SelectedRef = RELOCATION_ID(519394, 504099);
 		constexpr auto SetSelectedRef = RELOCATION_ID(50164, 51093);
 	}
 
